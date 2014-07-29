@@ -1,0 +1,389 @@
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+.background {
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  -webkit-box-shadow: inset 0 0 300px rgba(0,0,0,0.5);
+  box-shadow: inset 0 0 300px rgba(0,0,0,0.5);
+  z-index: -1;
+}
+article {
+  display: none;
+}
+article.bespoke-parent {
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow: hidden;
+  -webkit-perspective: 600px;
+  -moz-perspective: 600px;
+  -ms-perspective: 600px;
+  perspective: 600px;
+}
+.bespoke-slide {
+  -webkit-transition: all 0.6s ease;
+  -moz-transition: all 0.6s ease;
+  -o-transition: all 0.6s ease;
+  -ms-transition: all 0.6s ease;
+  transition: all 0.6s ease;
+  -webkit-transform-origin: 50% 50% -320px;
+  -moz-transform-origin: 50% 50% -320px;
+  -o-transform-origin: 50% 50% -320px;
+  -ms-transform-origin: 50% 50% -320px;
+  transform-origin: 50% 50% -320px;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -ms-backface-visibility: hidden;
+  backface-visibility: hidden;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-box;
+  display: -webkit-flex;
+  display: box;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+  -o-box-orient: vertical;
+  -ms-box-orient: vertical;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -moz-box-pack: center;
+  -o-box-pack: center;
+  -ms-box-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -moz-box-align: center;
+  -o-box-align: center;
+  -ms-box-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  text-align: center;
+  width: 640px;
+  height: 480px;
+  position: absolute;
+  top: 50%;
+  margin-top: -240px;
+  left: 50%;
+  margin-left: -320px;
+  background: rgba(255,255,255,0.7);
+  padding: 30px;
+  -webkit-border-radius: 0;
+  border-radius: 0;
+}
+.bespoke-slide > *:first-child {
+  margin-top: 0;
+}
+.bespoke-slide > *:last-child {
+  margin-bottom: 0;
+}
+.bespoke-slide.dark {
+  background: rgba(0,0,0,0.7);
+  color: #fff;
+}
+.bespoke-before {
+  -webkit-transform: translateX(0) rotateY(-90deg);
+  -moz-transform: translateX(0) rotateY(-90deg);
+  -o-transform: translateX(0) rotateY(-90deg);
+  -ms-transform: translateX(0) rotateY(-90deg);
+  transform: translateX(0) rotateY(-90deg);
+}
+.bespoke-after {
+  -webkit-transform: translateX(0) rotateY(90deg);
+  -moz-transform: translateX(0) rotateY(90deg);
+  -o-transform: translateX(0) rotateY(90deg);
+  -ms-transform: translateX(0) rotateY(90deg);
+  transform: translateX(0) rotateY(90deg);
+}
+.bespoke-inactive {
+  opacity: 0;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: alpha(opacity=0);
+  pointer-events: none;
+}
+.bespoke-active {
+  opacity: 1;
+  -ms-filter: none;
+  filter: none;
+}
+.bespoke-bullet {
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+.bespoke-bullet-inactive {
+  opacity: 0;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: alpha(opacity=0);
+}
+li.bespoke-bullet-inactive {
+  -webkit-transform: translateX(16px);
+  -moz-transform: translateX(16px);
+  -o-transform: translateX(16px);
+  -ms-transform: translateX(16px);
+  transform: translateX(16px);
+}
+.bespoke-bullet-active {
+  opacity: 1;
+  -ms-filter: none;
+  filter: none;
+}
+.emphatic,
+.emphatic .bespoke-slide {
+  background: rgba(255,255,255,0.7);
+}
+code {
+  font-size: 20px;
+  padding: 16px 36px !important;
+  max-width: 100%;
+  margin: 10px 0;
+  max-width: 100%;
+}
+code.min {
+  background: none !important;
+  padding: 10px !important;
+  font-size: 10px;
+}
+code.wrap {
+  white-space: pre-wrap;
+}
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+body {
+  background: #036;
+  font-family: helvetica, arial, sans-serif;
+  font-size: 26px;
+  color: #202020;
+}
+h1 {
+  font-size: 72px;
+  line-height: 82px;
+  letter-spacing: -2px;
+  margin-bottom: 16px;
+}
+h2 {
+  font-size: 42px;
+  letter-spacing: -1px;
+  margin-bottom: 26px;
+}
+h3 {
+  font-size: 24px;
+  font-weight: normal;
+  margin: 20px 0 21px;
+}
+h2 + h3 {
+  margin-top: -10px;
+}
+hr {
+  visibility: hidden;
+  height: 20px;
+}
+ul {
+  list-style: none;
+}
+li {
+  margin-bottom: 12px;
+}
+p {
+  margin: 0 100px 12px;
+  line-height: 32px;
+  margin-bottom: 26px;
+}
+a {
+  color: #0093cc;
+  text-decoration: none;
+}
+b {
+  display: inline-block;
+  -webkit-transition: 0.5s;
+  -moz-transition: 0.5s;
+  -ms-transition: 0.5s;
+  -o-transition: 0.5s;
+  -webkit-transition: 0.5s;
+  -moz-transition: 0.5s;
+  -o-transition: 0.5s;
+  -ms-transition: 0.5s;
+  transition: 0.5s;
+}
+.me {
+  background-image: url("../img/me.jpg");
+  -webkit-background-size: 100%;
+  -moz-background-size: 100%;
+  background-size: 100%;
+  width: 160px;
+  height: 160px;
+  -webkit-border-radius: 200px;
+  border-radius: 200px;
+  margin: 10px 0;
+  opacity: 0.95;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=95)";
+  filter: alpha(opacity=95);
+}
+.dimmed .background {
+  -webkit-filter: brightness(50%);
+}
+.blue .background {
+  background-color: #60b3d3;
+  -webkit-box-shadow: inset 0 0 300px rgba(0,0,0,0.3);
+  box-shadow: inset 0 0 300px rgba(0,0,0,0.3);
+}
+.hint {
+/*
+        We hide the hint until presentation is started and from browsers not supporting
+        impress.js, as they will have a linear scrollable view ...
+    */
+  display: block;
+/*
+        ... and give it some fixed position and nice styles.
+    */
+  position: fixed;
+  margin: 0;
+  left: 0;
+  right: 0;
+  bottom: 100px;
+  width: 100%;
+  background: rgba(0,0,0,0.5);
+  color: #eee;
+  text-align: center;
+  font-size: 24px;
+  padding: 20px;
+  z-index: 100;
+/*
+        By default we don't want the hint to be visible, so we make it transparent ...
+    */
+  opacity: 0;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: alpha(opacity=0);
+/*
+        ... and position it below the bottom of the screen (relative to it's fixed position)
+    */
+  -webkit-transform: translateY(400px);
+  -moz-transform: translateY(400px);
+  -ms-transform: translateY(400px);
+  -o-transform: translateY(400px);
+  -webkit-transform: translateY(400px);
+  -moz-transform: translateY(400px);
+  -o-transform: translateY(400px);
+  -ms-transform: translateY(400px);
+  transform: translateY(400px);
+/*
+        Now let's imagine that the hint is visible and we want to fade it out and move out
+        of the screen.
+        
+        So we define the transition on the opacity property with 1s duration and another
+        transition on transform property delayed by 1s so it will happen after the fade out
+        on opacity finished.
+        
+        This way user will not see the hint moving down.
+    */
+  -webkit-transition: opacity 5s, -webkit-transform 0.5s 1s;
+  -moz-transition: opacity 5s, -moz-transform 0.5s 1s;
+  -ms-transition: opacity 5s, -ms-transform 0.5s 1s;
+  -o-transition: opacity 5s, -o-transform 0.5s 1s;
+  -webkit-transition: opacity 5s, -webkit-transform 0.5s 1s;
+  -moz-transition: opacity 5s, -moz-transform 0.5s 1s;
+  -o-transition: opacity 5s, -o-transform 0.5s 1s;
+  -ms-transition: opacity 5s, -ms-transform 0.5s 1s;
+  transition: opacity 5s, transform 0.5s 1s;
+}
+.intro .hint {
+/*
+        We remove the transparency and position the hint in its default fixed
+        position.
+    */
+  opacity: 1;
+  -ms-filter: none;
+  filter: none;
+  -webkit-transform: translateY(0px);
+  -moz-transform: translateY(0px);
+  -ms-transform: translateY(0px);
+  -o-transform: translateY(0px);
+  -webkit-transform: translateY(0px);
+  -moz-transform: translateY(0px);
+  -o-transform: translateY(0px);
+  -ms-transform: translateY(0px);
+  transform: translateY(0px);
+/*
+        Now for fade in transition we have the oposite situation from the one
+        above.
+        
+        First after 4.5s delay we animate the transform property to move the hint
+        into its correct position and after that we fade it in with opacity 
+        transition.
+    */
+  -webkit-transition: opacity 1s 4s, -webkit-transform 0.5s 3.5s;
+  -moz-transition: opacity 1s 4s, -moz-transform 0.5s 3.5s;
+  -ms-transition: opacity 1s 4s, -ms-transform 0.5s 3.5s;
+  -o-transition: opacity 1s 4s, -o-transform 0.5s 3.5s;
+  -webkit-transition: opacity 1s 4s, -webkit-transform 0.5s 3.5s;
+  -moz-transition: opacity 1s 4s, -moz-transform 0.5s 3.5s;
+  -o-transition: opacity 1s 4s, -o-transform 0.5s 3.5s;
+  -ms-transition: opacity 1s 4s, -ms-transform 0.5s 3.5s;
+  transition: opacity 1s 4s, transform 0.5s 3.5s;
+}
+.intro .background,
+[data-bespoke-state^='intro'] a {
+  color: #cc5200;
+}
+.intro .rotating {
+  -webkit-transform: rotate(-10deg);
+  -moz-transform: rotate(-10deg);
+  -ms-transform: rotate(-10deg);
+  -o-transform: rotate(-10deg);
+  -webkit-transform: rotate(-10deg);
+  -moz-transform: rotate(-10deg);
+  -o-transform: rotate(-10deg);
+  -ms-transform: rotate(-10deg);
+  transform: rotate(-10deg);
+  -webkit-transition-delay: 0.25s;
+  -moz-transition-delay: 0.25s;
+  -ms-transition-delay: 0.25s;
+  -o-transition-delay: 0.25s;
+  -webkit-transition-delay: 0.25s;
+  -moz-transition-delay: 0.25s;
+  -o-transition-delay: 0.25s;
+  -ms-transition-delay: 0.25s;
+  transition-delay: 0.25s;
+}
+.image section {
+  opacity: 0;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: alpha(opacity=0);
+}
+.why .background {
+  background-image: url("../img/cleese_why.gif");
+}
+.sad .background {
+  background-image: url("../img/intherain.gif");
+}
+.mickey_dance .background {
+  background-image: url("../img/mickey_dance.gif");
+}
+[data-bespoke-state^='intro'] a {
+  color: #cc5200;
+}
+.uhwait .background {
+  background-image: url("../img/um_uh_wait.gif");
+}
+.no .background {
+  background-image: url("../img/no.gif");
+}
