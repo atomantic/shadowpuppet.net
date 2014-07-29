@@ -1,0 +1,334 @@
+@import 'nib' // CSS3 extensions for Stylus: http://visionmedia.github.io/nib/
+
+// variables!
+
+slide_width = 640px
+slide_height = 480px
+slide_background = rgba(255,255,255,0.7)
+
+slide_transition_length = .6s
+slide_transition_easing = ease
+slide_transition_translate_x = 0
+slide_transition_rotate_y = 90deg
+
+bullet_transition_length = .3s
+bullet_transition_easing = ease
+bullet_transition_translate_x = 16px
+
+// base
+
+*
+  box-sizing: border-box
+  margin: 0
+  padding: 0
+
+// bespoke.js layout styles
+
+.background
+  background-size: cover
+  background-position: center
+  background-repeat: no-repeat
+  box-shadow: inset 0 0 300px rgba(0,0,0,0.5)
+  z-index: -1
+
+article
+  display: none
+
+  &.bespoke-parent
+    display: block
+    position: absolute
+    top: 0
+    bottom: 0
+    left: 0
+    right: 0
+    overflow: hidden
+    perspective: 600px
+
+.bespoke-slide
+  transition: all slide_transition_length slide_transition_easing
+  transform-origin: 50% 50% ((slide_width / 2) * -1)
+  backface-visibility: hidden
+  display: flex
+  flex-direction: column
+  justify-content: center
+  align-items: center
+  text-align: center
+  width: slide_width
+  height: slide_height
+  position: absolute
+  top: 50%
+  margin-top: (slide_height / 2) * -1
+  left: 50%
+  margin-left: (slide_width / 2) * -1
+  background: slide_background
+  padding: 30px
+  border-radius: 0
+
+  > *:first-child
+    margin-top: 0
+
+  > *:last-child
+    margin-bottom: 0
+
+  &.dark
+    background: rgba(0,0,0,0.7)
+    color: white
+
+.bespoke-before
+  transform: translateX(slide_transition_translate_x * -1) rotateY(slide_transition_rotate_y * -1)
+
+.bespoke-after
+  transform: translateX(slide_transition_translate_x) rotateY(slide_transition_rotate_y)
+
+.bespoke-inactive
+  opacity: 0
+  pointer-events: none
+
+.bespoke-active
+  opacity: 1
+
+// bespoke-bullet styles
+
+.bespoke-bullet
+  transition: all bullet_transition_length bullet_transition_easing
+
+.bespoke-bullet-inactive
+  opacity: 0
+  li&
+    transform: translateX(bullet_transition_translate_x)
+
+.bespoke-bullet-active
+  opacity: 1
+
+// bespoke-state styles
+
+.emphatic,
+.emphatic .bespoke-slide
+  background: slide_background
+
+// prism styles
+
+code
+  font-size: 20px
+  padding: 16px 36px !important
+  max-width: 100%
+  margin: 10px 0;
+  max-width: 100%
+
+  &.min
+    background: none !important
+    padding: 10px !important
+    font-size: 10px
+
+  &.wrap
+    white-space: pre-wrap
+
+// content styles
+
+.background
+  position: absolute
+  top: 0
+  left: 0
+  bottom: 0
+  right: 0
+
+body
+  background: #036
+  font-family: helvetica, arial, sans-serif
+  font-size: 26px
+  color: #202020
+
+h1
+  font-size: 72px
+  line-height: 82px
+  letter-spacing: -2px
+  margin-bottom: 16px
+
+h2
+  font-size: 42px
+  letter-spacing: -1px
+  margin-bottom: 26px
+
+h3
+  font-size: 24px
+  font-weight: normal
+  margin: 20px 0 21px
+
+h2 + h3
+  margin-top: -10px
+
+hr
+  visibility: hidden
+  height: 20px
+
+ul
+  list-style: none
+
+li
+  margin-bottom: 12px
+
+p
+  margin: 0 100px 12px
+  line-height: 32px
+  margin-bottom: 26px
+
+a
+  color: #0093CC
+  text-decoration: none
+
+b 
+    display: inline-block
+    -webkit-transition: 0.5s
+    -moz-transition:    0.5s
+    -ms-transition:     0.5s
+    -o-transition:      0.5s
+    transition:         0.5s
+
+.me
+  size = 160px
+  background-image: url('../img/me.jpg')
+  background-size: 100%
+  width: size
+  height: size
+  border-radius: size+40
+  margin: 10px 0
+  opacity: 0.95
+
+.dimmed .background
+  -webkit-filter: brightness(50%)
+
+.blue .background
+  background-color: #60B3D3
+  box-shadow: inset 0 0 300px rgba(0,0,0,0.3)
+
+
+
+
+.hint {
+    /*
+        We hide the hint until presentation is started and from browsers not supporting
+        impress.js, as they will have a linear scrollable view ...
+    */
+    display: block;
+    
+    /*
+        ... and give it some fixed position and nice styles.
+    */
+    position: fixed;
+    margin:0;
+
+    left: 0;
+    right: 0;
+    bottom: 100px;
+    width:100%;
+    background: rgba(0,0,0,0.5);
+    color: #EEE;
+    text-align: center;
+    
+    font-size: 24px;
+    padding: 20px;
+    
+    z-index: 100;
+    
+    /*
+        By default we don't want the hint to be visible, so we make it transparent ...
+    */
+    opacity: 0;
+    
+    /*
+        ... and position it below the bottom of the screen (relative to it's fixed position)
+    */
+    -webkit-transform: translateY(400px);
+    -moz-transform:    translateY(400px);
+    -ms-transform:     translateY(400px);
+    -o-transform:      translateY(400px);
+    transform:         translateY(400px);
+
+    /*
+        Now let's imagine that the hint is visible and we want to fade it out and move out
+        of the screen.
+        
+        So we define the transition on the opacity property with 1s duration and another
+        transition on transform property delayed by 1s so it will happen after the fade out
+        on opacity finished.
+        
+        This way user will not see the hint moving down.
+    */
+    -webkit-transition: opacity 5s, -webkit-transform 0.5s 1s;
+    -moz-transition:    opacity 5s,    -moz-transform 0.5s 1s;
+    -ms-transition:     opacity 5s,     -ms-transform 0.5s 1s;
+    -o-transition:      opacity 5s,      -o-transform 0.5s 1s;
+    transition:         opacity 5s,         transform 0.5s 1s;
+}
+
+.intro .hint {
+    /*
+        We remove the transparency and position the hint in its default fixed
+        position.
+    */
+    opacity: 1;
+    
+    -webkit-transform: translateY(0px);
+    -moz-transform:    translateY(0px);
+    -ms-transform:     translateY(0px);
+    -o-transform:      translateY(0px);
+    transform:         translateY(0px);
+    
+    /*
+        Now for fade in transition we have the oposite situation from the one
+        above.
+        
+        First after 4.5s delay we animate the transform property to move the hint
+        into its correct position and after that we fade it in with opacity 
+        transition.
+    */
+    -webkit-transition: opacity 1s 4s, -webkit-transform 0.5s 3.5s;
+    -moz-transition:    opacity 1s 4s,    -moz-transform 0.5s 3.5s;
+    -ms-transition:     opacity 1s 4s,     -ms-transform 0.5s 3.5s;
+    -o-transition:      opacity 1s 4s,      -o-transform 0.5s 3.5s;
+    transition:         opacity 1s 4s,         transform 0.5s 3.5s;
+}
+
+
+
+.intro .background
+[data-bespoke-state^='intro'] a
+  color: #CC5200
+
+.intro .rotating
+    -webkit-transform: rotate(-10deg)
+    -moz-transform:    rotate(-10deg)
+    -ms-transform:     rotate(-10deg)
+    -o-transform:      rotate(-10deg)
+    transform:         rotate(-10deg)
+
+    -webkit-transition-delay: 0.25s
+    -moz-transition-delay:    0.25s
+    -ms-transition-delay:     0.25s
+    -o-transition-delay:      0.25s
+    transition-delay:         0.25s
+
+
+
+.image section{
+  opacity:0;
+}
+
+
+.why .background
+  background-image: url('../img/cleese_why.gif')
+
+.sad .background
+  background-image: url('../img/intherain.gif')
+
+.mickey_dance .background
+  background-image: url('../img/mickey_dance.gif')
+[data-bespoke-state^='intro'] a
+  color: #CC5200
+
+.uhwait .background
+  background-image: url('../img/um_uh_wait.gif')
+
+.no .background
+  background-image: url('../img/no.gif')
+

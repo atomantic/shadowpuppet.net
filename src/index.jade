@@ -1,0 +1,58 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
+    title DisneyID Mobile
+
+    // build:css styles/styles.css
+    //- Check out 'src/bower_components/prism/themes/' for available themes
+    link(rel='stylesheet', type='text/css', href='bower_components/prism/themes/prism-tomorrow.css')
+    link(rel='stylesheet', type='text/css', href='styles/main.css')
+    // endbuild
+
+  body
+
+    article
+
+      section(data-bespoke-state='intro dimmed',data-bespoke-hash='hi')
+        h2 <b class="rotating">\[._.]/</b> - Oh, Hi!</h1>
+        h3 This was ShadowPuppet Web Development
+        h3 ...
+        p(class='hint') <small>(use arrow keys or swipe to navigate)</small>
+
+      section(data-bespoke-state='mickey_dance',data-bespoke-hash='employed')
+        h3 But now I work for
+        h2 The Walt Disney Company
+
+      section(data-bespoke-state='uhwait',data-bespoke-hash='but')
+        h2 But wait... 
+        ul
+        li Do you still do freelance?
+        li Will you build me a site?
+        li Do you want to work for equity?
+
+      section(data-bespoke-state='no image',data-bespoke-hash='no')
+
+      section(data-bespoke-state='end',data-bespoke-hash='me')
+        .me
+        h2 \m/_[._.]_\m/
+        h2
+          a(href='http://adameivy.com') http://adameivy.com
+        h3
+          p Adam Eivy 
+            a(href='http://twitter.com/antic', target='_blank') @antic
+
+    div(class='hint') Use a spacebar or arrow keys to navigate
+
+    // build:js scripts/scripts.js
+    script(src='bower_components/bespoke.js/dist/bespoke.min.js')
+    script(src='bower_components/bespoke-keys/dist/bespoke-keys.min.js')
+    script(src='bower_components/bespoke-touch/dist/bespoke-touch.min.js')
+    script(src='bower_components/bespoke-bullets/dist/bespoke-bullets.min.js')
+    script(src='bower_components/bespoke-scale/dist/bespoke-scale.min.js')
+    script(src='bower_components/bespoke-hash/dist/bespoke-hash.min.js')
+    script(src='bower_components/bespoke-progress/dist/bespoke-progress.min.js')
+    script(src='bower_components/bespoke-state/dist/bespoke-state.min.js')
+    script(src='scripts/main.js')
+    // endbuild
