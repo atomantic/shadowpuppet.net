@@ -88,14 +88,14 @@ module.exports = function(grunt) {
           '!public/bower_components/**/*'
         ],
         options: {
-          livereload: 35729
+          livereload: 35728
         }
       }
     },
     connect: {
       server: {
         options: {
-          port: 8000,
+          port: 8002,
           hostname: '*', // Remove this line if you only want the server available locally
           base: 'public',
           keepalive: true,
