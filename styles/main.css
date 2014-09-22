@@ -369,6 +369,10 @@ b {
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
   filter: alpha(opacity=0);
 }
+.intro .background,
+.end .background {
+  background-image: url("../img/ocean_waves.gif");
+}
 .why .background {
   background-image: url("../img/cleese_why.gif");
 }
