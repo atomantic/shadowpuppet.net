@@ -26,7 +26,7 @@ var _ = self.Prism = {
 	util: {
 		encode: function (tokens) {
 			if (tokens instanceof Token) {
-				return new Token(tokens.type, _.util.encode(tokens.content), tokens.alias);
+				return new Token(tokens.type, _.util.encode(tokens.content));
 			} else if (_.util.type(tokens) === 'Array') {
 				return tokens.map(_.util.encode);
 			} else {
@@ -101,16 +101,12 @@ var _ = self.Prism = {
 		},
 
 		// Traverse a language definition with Depth First Search
-		DFS: function(o, callback, type) {
+		DFS: function(o, callback) {
 			for (var i in o) {
-				if (o.hasOwnProperty(i)) {
-					callback.call(o, i, o[i], type || i);
+				callback.call(o, i, o[i]);
 
-					if (_.util.type(o[i]) === 'Object') {
-						_.languages.DFS(o[i], callback);
-					} else if (_.util.type(o[i]) === 'Array') {
-						_.languages.DFS(o[i], callback, i);
-					}
+				if (_.util.type(o) === 'Object') {
+					_.languages.DFS(o[i], callback);
 				}
 			}
 		}
@@ -223,63 +219,57 @@ var _ = self.Prism = {
 				continue;
 			}
 
-			var patterns = grammar[token];
-			patterns = (_.util.type(patterns) === "Array") ? patterns : [patterns];
+			var pattern = grammar[token],
+				inside = pattern.inside,
+				lookbehind = !!pattern.lookbehind,
+				lookbehindLength = 0;
 
-			for (var j = 0; j < patterns.length; ++j) {
-				var pattern = patterns[j],
-					inside = pattern.inside,
-					lookbehind = !!pattern.lookbehind,
-					lookbehindLength = 0,
-					alias = pattern.alias;
+			pattern = pattern.pattern || pattern;
 
-				pattern = pattern.pattern || pattern;
+			for (var i=0; i<strarr.length; i++) { // Don’t cache length as it changes during the loop
 
-				for (var i=0; i<strarr.length; i++) { // Don’t cache length as it changes during the loop
+				var str = strarr[i];
 
-					var str = strarr[i];
+				if (strarr.length > text.length) {
+					// Something went terribly wrong, ABORT, ABORT!
+					break tokenloop;
+				}
 
-					if (strarr.length > text.length) {
-						// Something went terribly wrong, ABORT, ABORT!
-						break tokenloop;
+				if (str instanceof Token) {
+					continue;
+				}
+
+				pattern.lastIndex = 0;
+
+				var match = pattern.exec(str);
+
+				if (match) {
+					if(lookbehind) {
+						lookbehindLength = match[1].length;
 					}
 
-					if (str instanceof Token) {
-						continue;
+					var from = match.index - 1 + lookbehindLength,
+					    match = match[0].slice(lookbehindLength),
+					    len = match.length,
+					    to = from + len,
+						before = str.slice(0, from + 1),
+						after = str.slice(to + 1);
+
+					var args = [i, 1];
+
+					if (before) {
+						args.push(before);
 					}
 
-					pattern.lastIndex = 0;
+					var wrapped = new Token(token, inside? _.tokenize(match, inside) : match);
 
-					var match = pattern.exec(str);
+					args.push(wrapped);
 
-					if (match) {
-						if(lookbehind) {
-							lookbehindLength = match[1].length;
-						}
-
-						var from = match.index - 1 + lookbehindLength,
-							match = match[0].slice(lookbehindLength),
-							len = match.length,
-							to = from + len,
-							before = str.slice(0, from + 1),
-							after = str.slice(to + 1);
-
-						var args = [i, 1];
-
-						if (before) {
-							args.push(before);
-						}
-
-						var wrapped = new Token(token, inside? _.tokenize(match, inside) : match, alias);
-
-						args.push(wrapped);
-
-						if (after) {
-							args.push(after);
-						}
-
-						Array.prototype.splice.apply(strarr, args);
+					if (after) {
+						args.push(after);
 					}
+
+					Array.prototype.splice.apply(strarr, args);
 				}
 			}
 		}
@@ -312,10 +302,9 @@ var _ = self.Prism = {
 	}
 };
 
-var Token = _.Token = function(type, content, alias) {
+var Token = _.Token = function(type, content) {
 	this.type = type;
 	this.content = content;
-	this.alias = alias;
 };
 
 Token.stringify = function(o, language, parent) {
@@ -343,11 +332,6 @@ Token.stringify = function(o, language, parent) {
 		env.attributes['spellcheck'] = 'true';
 	}
 
-	if (o.alias) {
-		var aliases = _.util.type(o.alias) === 'Array' ? o.alias : [o.alias];
-		Array.prototype.push.apply(env.classes, aliases);
-	}
-
 	_.hooks.run('wrap', env);
 
 	var attributes = '';
@@ -371,7 +355,7 @@ if (!self.document) {
 		    lang = message.language,
 		    code = message.code;
 
-		self.postMessage(JSON.stringify(_.util.encode(_.tokenize(code, _.languages[lang]))));
+		self.postMessage(JSON.stringify(_.tokenize(code, _.languages[lang])));
 		self.close();
 	}, false);
 
@@ -488,16 +472,10 @@ if (Prism.languages.markup) {
 ********************************************** */
 
 Prism.languages.clike = {
-	'comment': [
-		{
-			pattern: /(^|[^\\])\/\*[\w\W]*?\*\//g,
-			lookbehind: true
-		},
-		{
-			pattern: /(^|[^\\:])\/\/.*?(\r?\n|$)/g,
-			lookbehind: true
-		}
-	],
+	'comment': {
+		pattern: /(^|[^\\])(\/\*[\w\W]*?\*\/|(^|[^:])\/\/.*?(\r?\n|$))/g,
+		lookbehind: true
+	},
 	'string': /("|')(\\?.)*?\1/g,
 	'class-name': {
 		pattern: /((?:(?:class|interface|extends|implements|trait|instanceof|new)\s+)|(?:catch\s+\())[a-z0-9_\.\\]+/ig,

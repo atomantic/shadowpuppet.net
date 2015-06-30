@@ -1,8 +1,6 @@
 Prism.languages.coffeescript = Prism.languages.extend('javascript', {
-	'comment': [
-		/([#]{3}\s*\r?\n(.*\s*\r*\n*)\s*?\r?\n[#]{3})/g,
-		/(\s|^)([#]{1}[^#^\r^\n]{2,}?(\r?\n|$))/g
-	],
+	'block-comment': /([#]{3}\s*\r?\n(.*\s*\r*\n*)\s*?\r?\n[#]{3})/g,
+	'comment': /(\s|^)([#]{1}[^#^\r^\n]{2,}?(\r?\n|$))/g,
 	'keyword': /\b(this|window|delete|class|extends|namespace|extend|ar|let|if|else|while|do|for|each|of|return|in|instanceof|new|with|typeof|try|catch|finally|null|undefined|break|continue)\b/g
 });
 
