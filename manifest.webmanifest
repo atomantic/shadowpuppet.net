@@ -1,0 +1,25 @@
+{
+  "name": "ShadowPuppet — Quiet apps for loud times",
+  "short_name": "ShadowPuppet",
+  "description": "Six privacy-first apps for iPhone, iPad and Mac. No accounts. No tracking. Just tools.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "browser",
+  "theme_color": "#0d0a14",
+  "background_color": "#0d0a14",
+  "lang": "en-US",
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "sizes": "any",
+      "type": "image/png"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "any",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "categories": ["productivity", "lifestyle", "business"]
+}

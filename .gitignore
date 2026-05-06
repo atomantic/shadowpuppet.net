@@ -2,3 +2,6 @@ node_modules
 src/bower_components
 public
 .tmp
+.superpowers/
+.playwright-mcp/
+.DS_Store
